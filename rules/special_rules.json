@@ -1,0 +1,19 @@
+{
+  "providers": {
+    "amp-project": {
+      "urlPattern": "(.*google\\..*\\/amp\\/s\\/.*|\\/amp\\/|(\\?|&)amp\\b|\\.amp\\.htm)",
+      "specialRegex": true,
+      "completeProvider": false,
+      "rules": [
+        ".*google.*\\/amp\\/s\\/(.*) <-> \\1",
+        "(\\/google)?\\/amp\\b <-> ",
+        "\\.amp\\.htm <-> .htm"
+      ],
+      "referralMarketing": [],
+      "exceptions": [],
+      "rawRules": [],
+      "redirections": [],
+      "forceRedirection": false
+    }
+  }
+}
