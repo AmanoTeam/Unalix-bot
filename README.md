@@ -58,20 +58,10 @@ Unalix has some limitations related to link processing, see them below:
 
 ### Installation
 
-Install all required modules/dependencies using one of the commands below:
-
-**Install directly:**
+Install all required modules/dependencies using `pip`:
 
 ```
-pip3 install --upgrade 'requests' 'pyTelegramBotAPI'
-```
-
-**or**
-
-**Read requirements from file:**
-
-```
-pip3 install --upgrade --requirement 'Unalix/requirements.txt'
+pip3 install --upgrade 'requests' 'pyTelegramBotAPI' 'random-user-agent'
 ```
 
 ### Get the source
@@ -84,7 +74,7 @@ To get Unalix source code, clone the repository using `git` or download using ` 
 $ git clone --branch 'master' 'https://github.com/AmanoTeam/Unalix.git' ~/Unalix
 ```
 
-**or**
+or
 
 **Download with wget and extract all files:**
 
@@ -101,7 +91,7 @@ In the [Unalix/Unalix.py](Unalix.sh#L6) file, on line 6, there is the following 
 bot = telebot.TeleBot('YOUR_TOKEN_HERE')
 ```
 
-Replace `YOUR_TOKEN_HERE` by the token of your bot.
+Open the file with a text editor and replace `YOUR_TOKEN_HERE` by the token of your bot.
 
 ### Start the bot
 
