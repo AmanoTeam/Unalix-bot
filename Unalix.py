@@ -61,7 +61,7 @@ def parse_tracking_fields(message):
 		}
 		
 		try:
-			with requests.get(full_url, headers=headers, stream=True, timeout=25, verify='Unalix/certificates/cacert.pem') as r:
+			with requests.get(full_url, headers=headers, stream=True, timeout=8, verify='Unalix/certificates/cacert.pem') as r:
 				full_url = r.url
 		except:
 			print('Couldn\'t parse this link: '+full_url)
