@@ -64,6 +64,8 @@ def parse_tracking_fields(message):
 				full_url = r.url
 		except:
 			print('Couldn\'t parse this link: '+full_url)
+			bot.reply_to(message, '`'+full_url+'`', parse_mode='markdown')
+			break
 		
 		if loop == 1:
 				bot.reply_to(message, '`'+full_url+'`', parse_mode='markdown')
