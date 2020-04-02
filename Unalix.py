@@ -8,7 +8,7 @@ bot = telebot.TeleBot('YOUR_TOKEN_HERE')
 
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
-	bot.reply_to(message, dialogs_dict['dialogs']['beginning'], parse_mode='markdown')
+	bot.reply_to(message, dialogs_dict['dialogs']['beginning'], parse_mode='markdown', disable_notification=True)
 
 @bot.message_handler(regexp='^https?://.+')
 def parse_tracking_fields(message):
@@ -69,11 +69,11 @@ def parse_tracking_fields(message):
 				full_url = r.url
 		except:
 			print('Couldn\'t parse this link: '+full_url)
-			bot.reply_to(message, '`'+full_url+'`', parse_mode='markdown')
+			bot.reply_to(message, '`'+full_url+'`', parse_mode='markdown', disable_notification=True)
 			break
 		
 		if loop == 1:
-				bot.reply_to(message, '`'+full_url+'`', parse_mode='markdown')
+				bot.reply_to(message, '`'+full_url+'`', parse_mode='markdown', disable_notification=True)
 				break
 		
 bot.polling()
