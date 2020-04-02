@@ -37,6 +37,7 @@ def parse_tracking_fields(message):
 									full_url = re.sub(redirection_rule+'.*', '\g<1>', full_url)
 								if full_url != original_url:
 									full_url = urllib.parse.unquote(full_url)
+									full_url = re.sub('^(https?://)?', 'http://', full_url)
 								for common_rule in rules_dict['providers'][provider_name]['rules']:
 									full_url = re.sub('(%26|&|%23|#|%3F|%3f|\?)'+common_rule+'(\=[^&]*)?', '\g<1>', full_url)
 								for raw_rule in rules_dict['providers'][provider_name]['rawRules']:
