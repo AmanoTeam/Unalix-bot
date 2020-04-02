@@ -1,4 +1,5 @@
 import json, re, urllib.parse, requests, telebot
+from random_user_agent.user_agent import UserAgent
 
 with open('Unalix/dialogs/en.json', 'r') as dialogs_file:
 	dialogs_dict = json.loads(dialogs_file.read())
@@ -53,8 +54,11 @@ def parse_tracking_fields(message):
 						replace = re.sub('^.*\s<\->\s(.*)$', '\g<1>', special_rule)
 						full_url = re.sub(pattern, replace, full_url)
 		
+		if loop == 0:
+			ua = UserAgent(software_names=[ 'chrome', 'chromium', 'firefox', 'opera' ], operating_systems=[ 'linux', 'windows', 'mac' ], limit=50)
+		
 		headers = {
-			'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.162 Safari/537.36', 
+			'User-Agent': ua.get_random_user_agent(),
 			'Accept': None,
 			'Accept-Encoding': None,
 			'Connection': None
