@@ -38,9 +38,9 @@ Note that Unalix can also identify links in forwarded messages and file captions
 
 ### Is the bot safe?
 
-Unalix does not permanently store or collect sent links/messages.
+* Unalix does not permanently store or collect sent links/messages.
 
-We do not send spam, advertisements or anything unrelated to the bot's primary purpose to its users.
+* We do not send spam, advertisements or anything unrelated to the bot's primary purpose to its users.
 
 ## Limitations
 
@@ -60,7 +60,7 @@ Unalix has some limitations related to link processing, see them below:
 
 Install all required modules/dependencies using one of the commands below:
 
-Install directly:
+**Install directly:**
 
 ```
 pip3 install --upgrade 'requests' 'pyTelegramBotAPI'
@@ -68,7 +68,7 @@ pip3 install --upgrade 'requests' 'pyTelegramBotAPI'
 
 **or**
 
-Read requirements from file:
+**Read requirements from file:**
 
 ```
 pip3 install --upgrade --requirement 'Unalix/requirements.txt'
@@ -78,7 +78,7 @@ pip3 install --upgrade --requirement 'Unalix/requirements.txt'
 
 To get Unalix source code, clone the repository using `git` or download using ` wget`.
 
-#### Clone using git:
+**Clone using git:**
 
 ```
 $ git clone --branch 'master' 'https://github.com/AmanoTeam/Unalix.git' ~/Unalix
@@ -86,7 +86,7 @@ $ git clone --branch 'master' 'https://github.com/AmanoTeam/Unalix.git' ~/Unalix
 
 **or**
 
-#### Download with wget and extract all files:
+**Download with wget and extract all files:**
 
 ```
 $ wget 'https://codeload.github.com/AmanoTeam/Unalix/zip/master' --output-document ~/Unalix.zip
