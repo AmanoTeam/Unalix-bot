@@ -1,6 +1,5 @@
 {
   "dialogs": {
-    "beginning": "Send via a message the link you want to be \"clean\". Unalix will begin processing your request and within a few seconds, it will send you the final result.\n\nIn order to be able to identify the link contained in the message, it must be in the following format:\n\n• It must start with `http://` or `https://` (case-sensitive)\n\nFor more information about Unalix, take a look at our [GitHub repository](https://github.com:443/AmanoTeam/Unalix).",
-    "unknown_error": "An error has occurred."
+    "beginning": "Send via a message the link you want to be \"clean\". Unalix will begin processing your request and within a few seconds, it will send you the final result.\n\nIn order to be able to identify the link contained in the message, it must be in the following format:\n\n• It must start with `http://` or `https://` (case-sensitive)\n\nFor more information about Unalix, take a look at our [GitHub repository](https://github.com/AmanoTeam/Unalix)."
   }
 }
