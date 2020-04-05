@@ -51,9 +51,6 @@ Unalix has some limitations related to link processing, see them below:
 - Unalix only follows the URLs/paths provided by the `Location` header
    - It means that Unalix cannot obtain direct links from URL shorteners that require user interaction (e.g clicking a button or resolving CAPTCHA) to redirect or that uses JavaScript code to redirect.
 
-- Requests may get blocked
-   - To ensure greater privacy, all Unalix network traffic goes through the Tor network. As a result, sites that uses Cloudflare or other protection services may eventually block the acess of Unalix to the server, which prevents the bot from obtaining the direct link from the shortened URL
- 
 ## For developers
 
 ### Installation
@@ -61,7 +58,7 @@ Unalix has some limitations related to link processing, see them below:
 Install all required modules/dependencies using `pip`:
 
 ```
-pip3 install --upgrade 'requests' 'pyTelegramBotAPI' 'random-user-agent'
+pip3 install --upgrade 'requests' 'pyTelegramBotAPI'
 ```
 
 ### Get the source
@@ -85,7 +82,7 @@ $ mv 'Unalix-master' 'Unalix'
 ```
 ### Setup the bot
 
-In the [Unalix/Unalix.py](Unalix.sh#L6) file, on line 6, there is the following content:
+In the [Unalix/Unalix.py](Unalix.py#L7) file, on line 7, there is the following content:
 
 ```
 bot = telebot.TeleBot('YOUR_TOKEN_HERE')

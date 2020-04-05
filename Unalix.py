@@ -1,79 +1,73 @@
-import json, re, urllib.parse, requests, telebot
-from random_user_agent.user_agent import UserAgent
-
-with open('Unalix/dialogs/en.json', 'r') as dialogs_file:
-	dialogs_dict = json.loads(dialogs_file.read())
+import json
+import re
+import requests
+import telebot
+import urllib.parse
 
 bot = telebot.TeleBot('YOUR_TOKEN_HERE')
+  
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:61.0) Gecko/20100101 Firefox/74.0',
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    'Accept-Language': 'en-US,en;q=0.5',
+    'Accept-Encoding': 'gzip, deflate, br',
+    'Connection': 'keep-alive',
+    'Upgrade-Insecure-Requests': '1'
+}
 
+with open('Unalix/dialogs/en.json', 'r') as dialogs_file:
+    dialogs = json.loads(dialogs_file.read())
+ 
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
-	bot.reply_to(message, dialogs_dict['dialogs']['beginning'], parse_mode='markdown', disable_notification=True)
-
+    bot.reply_to(message, dialogs['welcome'], parse_mode='markdown', disable_web_page_preview=True, disable_notification=True)
+ 
 @bot.message_handler(regexp='^https?://.+')
 def parse_tracking_fields(message):
-	
-	for loop in range(0, 2):
-		
-		if loop == 1:
-			original_url = full_url
-		else:
-			full_url = message.text
-			original_url = message.text
-		
-		for rules_file in [ 'data.min.json',  'custom-data.min.json' ]:
-			with open('Unalix/rules/'+rules_file, 'r') as rules_file:
-				rules_dict = json.loads(rules_file.read())
-			for provider_name in rules_dict['providers'].keys():
-				if rules_dict['providers'][provider_name]['completeProvider'] != 'true':
-					for pattern in [ rules_dict['providers'][provider_name]['urlPattern'] ]:
-						if re.match(pattern, full_url):
-							for exception in rules_dict['providers'][provider_name]['exceptions']:
-								if re.match(exception, full_url):
-									is_exception = True
-							try:
-								is_exception
-							except:
-								for redirection_rule in rules_dict['providers'][provider_name]['redirections']:
-									full_url = re.sub(redirection_rule+'.*', '\g<1>', full_url)
-								if full_url != original_url:
-									full_url = urllib.parse.unquote(full_url)
-									full_url = re.sub('^(https?://)?', 'http://', full_url)
-								for common_rule in rules_dict['providers'][provider_name]['rules']:
-									full_url = re.sub('(%26|&|%23|#|%3F|%3f|\?)'+common_rule+'(\=[^&]*)?', '\g<1>', full_url)
-								for raw_rule in rules_dict['providers'][provider_name]['rawRules']:
-									full_url = re.sub(raw_rule, '', full_url)
-		
-		for rules_file in [ 'special_rules.json',  'remaining_fields.json' ]:
-			with open('Unalix/rules/'+rules_file, 'r') as rules_file:
-				rules_dict = json.loads(rules_file.read())
-			for provider_name in rules_dict['providers'].keys():
-				if re.match(rules_dict['providers'][provider_name]['urlPattern'], full_url):
-					for special_rule in rules_dict['providers'][provider_name]['rules']:
-						pattern = re.sub('^(.*)\s<\->\s.*$', '\g<1>', special_rule)
-						replace = re.sub('^.*\s<\->\s(.*)$', '\g<1>', special_rule)
-						full_url = re.sub(pattern, replace, full_url)
-		
-		if loop == 0:
-			ua = UserAgent(software_names=[ 'chrome', 'chromium', 'firefox', 'opera' ], operating_systems=[ 'linux', 'windows', 'mac' ], limit=50)
-		
-		headers = {
-			'User-Agent': ua.get_random_user_agent(),
-			'Accept': None,
-			'Accept-Encoding': None,
-			'Connection': None
-		}
-		
-		try:
-			with requests.get(full_url, headers=headers, stream=True, timeout=8, verify='Unalix/certificates/cacert.pem') as r:
-				full_url = r.url
-		except:
-			print('Couldn\'t parse this link: '+full_url)
-			bot.reply_to(message, '`'+full_url+'`', parse_mode='markdown', disable_notification=True)
-			break
-		
-		if loop == 1:
-				bot.reply_to(message, '`'+full_url+'`', parse_mode='markdown', disable_notification=True)
-				break
-		
+    
+    url = message.text
+    
+    try:
+        with requests.get(url, headers=headers, stream=True, timeout=8, verify='Unalix/certificates/cacert.pem') as r:
+            url = r.url
+    except Exception as e:
+        print('Python Requests couldn\'t parse this link: '+url)
+        print(e)
+    
+    original_url = url
+    
+    for rules_file in [ 'data.min.json',  'custom-data.min.json' ]:
+        with open('Unalix/rules/'+rules_file, 'r') as rules_file:
+            rules = json.loads(rules_file.read())
+        for provider_name in rules['providers'].keys():
+            if rules['providers'][provider_name]['completeProvider'] != 'true':
+                for pattern in [ rules['providers'][provider_name]['urlPattern'] ]:
+                    if re.match(pattern, url):
+                        for exception in rules['providers'][provider_name]['exceptions']:
+                            if re.match(exception, url):
+                                is_exception = True
+                        try:
+                            is_exception
+                        except:
+                            for redirection_rule in rules['providers'][provider_name]['redirections']:
+                                url = re.sub(redirection_rule+'.*', '\g<1>', url)
+                            if url != original_url:
+                                url = urllib.parse.unquote(url)
+                            for common_rule in rules['providers'][provider_name]['rules']:
+                                url = re.sub('(%26|&|%23|#|%3F|%3f|\?)'+common_rule+'(\=[^&]*)?', '\g<1>', url)
+                            for raw_rule in rules['providers'][provider_name]['rawRules']:
+                                url = re.sub(raw_rule, '', url)
+    
+    for rules_file in [ 'special_rules.json',  'remaining_fields.json' ]:
+        with open('Unalix/rules/'+rules_file, 'r') as rules_file:
+            rules = json.loads(rules_file.read())
+        for provider_name in rules['providers'].keys():
+            if re.match(rules['providers'][provider_name]['urlPattern'], url):
+                for special_rule in rules['providers'][provider_name]['rules']:
+                    pattern = re.sub('^(.*)\s<\->\s.*$', '\g<1>', special_rule)
+                    replace = re.sub('^.*\s<\->\s(.*)$', '\g<1>', special_rule)
+                    url = re.sub(pattern, replace, url)
+        
+    bot.reply_to(message, '`'+url+'`', parse_mode='markdown', disable_notification=True)
+        
 bot.polling()

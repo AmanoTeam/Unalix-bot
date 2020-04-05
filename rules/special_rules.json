@@ -2,12 +2,47 @@
   "providers": {
     "amp-project": {
       "urlPattern": "(.*google\\..*\\/amp\\/s\\/.*|\\/amp\\/|(\\?|&)amp\\b|\\.amp\\.htm)",
-      "specialRegex": true,
       "completeProvider": false,
       "rules": [
         ".*google.*\\/amp\\/s\\/(.*) <-> \\1",
         "(\\/google)?\\/amp\\b <-> ",
         "\\.amp\\.htm <-> .htm"
+      ],
+      "referralMarketing": [],
+      "exceptions": [],
+      "rawRules": [],
+      "redirections": [],
+      "forceRedirection": false
+    },
+    "youtube": {
+      "urlPattern": "(https:\\/\\/|http:\\/\\/)([a-zA-Z0-9-.]*\\.)?(youtube\\.com|youtu\\.be).*",
+      "completeProvider": false,
+      "rules": [
+        "(www\\.)?(youtube\\.com|youtu\\.be) <-> invidio.us"
+      ],
+      "referralMarketing": [],
+      "exceptions": [],
+      "rawRules": [],
+      "redirections": [],
+      "forceRedirection": false
+    },
+    "twitter": {
+      "urlPattern": "(https:\\/\\/|http:\\/\\/)([a-zA-Z0-9-.]*\\.)?(twitter\\.com).*",
+      "completeProvider": false,
+      "rules": [
+        "(www\\.)?(twitter\\.com) <-> nitter.net"
+      ],
+      "referralMarketing": [],
+      "exceptions": [],
+      "rawRules": [],
+      "redirections": [],
+      "forceRedirection": false
+    },
+    "instagram": {
+      "urlPattern": "(https:\\/\\/|http:\\/\\/)([a-zA-Z0-9-.]*\\.)?(instagram\\.com).*",
+      "completeProvider": false,
+      "rules": [
+        "(www\\.)?(instagram\\.com) <-> bibliogram.pussthecat.org"
       ],
       "referralMarketing": [],
       "exceptions": [],
