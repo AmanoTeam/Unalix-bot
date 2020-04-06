@@ -6,6 +6,8 @@ Unalix is a bot developed for Telegram. Its main purpose is to help users remove
 
 ### What it does?
 
+#### 
+
 In addition to removing tracking fields from user-submitted URLs, Unalix also try to gets the direct link from shortened URLs. Example: If you send a shortened URL from services like [bit.ly](https://bitly.com) or [goo.gl](https://goo.gl), the bot will return you the URL to which the original link redirects, not the `bit.ly` or `goo.gl` URL.
 
 ### Why would this be useful to me?
@@ -14,7 +16,7 @@ In addition to removing tracking fields from user-submitted URLs, Unalix also tr
 
 It is quite common to share links within Telegram, whether they are conversations with other users or within groups. Most people don't check links before sending them, they just copy and paste. This is the biggest problem.
 
-Links we share may contain tracking parameters related to services such as [Google Analytics](https://en.wikipedia.org/wiki/Google_Analytics) or [Google Ads](https://en.wikipedia.org/wiki/Google_Ads). The sole purpose of these parameters is to track and collect information about our online browsing.
+Links we share may contain tracking parameters related to services such as [Google Analytics](https://en.wikipedia.org/wiki/UTM_parameters) or [Google Ads](https://en.wikipedia.org/wiki/Google_Ads). The sole purpose of these parameters is to track and collect information about our online browsing.
 
 By sharing links like these, we are not only compromising our privacy, but we are also compromising the privacy of users who click on the link sent by us. To avoid this, it is always necessary to check a link before sending them. We must analyze and remove the tracking parameters present in it.
 
@@ -34,8 +36,6 @@ In order to be able to identify the link contained in the message, it must be in
 
 * It must start with `http://` or `https://` (case-sensitive)
 
-Note that Unalix can also identify links in forwarded messages and file captions.
-
 ### Is the bot safe?
 
 * Unalix does not permanently store or collect sent links/messages.
@@ -52,6 +52,8 @@ Unalix has some limitations related to link processing, see them below:
    - It means that Unalix cannot obtain direct links from URL shorteners that require user interaction (e.g clicking a button or resolving CAPTCHA) to redirect or that uses JavaScript code to redirect.
 
 ## For developers
+
+Unalix is ​​written in Python. To find out how to run it in your operating environment, follow the instructions below.
 
 ### Installation
 
