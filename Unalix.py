@@ -70,4 +70,4 @@ def parse_tracking_fields(message):
         
     bot.reply_to(message, '`'+url+'`', parse_mode='markdown', disable_notification=True)
         
-bot.polling()
+bot.polling(none_stop=True)
