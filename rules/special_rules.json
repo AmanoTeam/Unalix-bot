@@ -49,6 +49,26 @@
       "rawRules": [],
       "redirections": [],
       "forceRedirection": false
+    },
+    "all": {
+      "urlPattern": ".*",
+      "completeProvider": false,
+      "rules": [
+        "(%26)+ <-> \\1",
+        "(&)+ <-> \\1",
+        "(%3f)+ <-> \\1",
+        "(%3F)+ <-> \\1",
+        "s/(\\?)+ <-> \\1",
+        "(%3f|%3F|\\?|%23|&)+$ <-> ",
+        "\\?& <-> ?",
+        "%3f%26 <-> %3f",
+        "%3F%26 <-> %3F"
+      ],
+      "referralMarketing": [],
+      "exceptions": [],
+      "rawRules": [],
+      "redirections": [],
+      "forceRedirection": false
     }
   }
 }

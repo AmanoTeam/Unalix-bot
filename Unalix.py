@@ -50,7 +50,7 @@ def parse_tracking_fields(url):
                             for raw_rule in rules['providers'][provider_name]['rawRules']:
                                 url = re.sub(raw_rule, '', url)
     
-    for rules_file in [ 'special_rules.json',  'remaining_fields.json' ]:
+    for rules_file in [ 'special_rules.json' ]:
         with open('Unalix/rules/'+rules_file, 'r') as rules_file:
             rules = json.loads(rules_file.read())
         for provider_name in rules['providers'].keys():
@@ -61,7 +61,6 @@ def parse_tracking_fields(url):
                     url = re.sub(pattern, replace, url)
     
     return url
-
 
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
