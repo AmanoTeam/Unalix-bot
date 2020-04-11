@@ -5,9 +5,9 @@ import telebot
 import urllib.parse
 
 bot = telebot.TeleBot('YOUR_TOKEN_HERE')
-  
+
 headers = {
-    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:61.0) Gecko/20100101 Firefox/74.0',
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:75.0) Gecko/20100101 Firefox/75.0',
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
     'Accept-Language': 'en-US,en;q=0.5',
     'Accept-Encoding': 'gzip, deflate, br',
@@ -17,11 +17,11 @@ headers = {
 
 with open('Unalix/dialogs/en.json', 'r') as dialogs_file:
     dialogs = json.loads(dialogs_file.read())
- 
+
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
     bot.reply_to(message, dialogs['welcome'], parse_mode='markdown', disable_web_page_preview=True, disable_notification=True)
- 
+
 @bot.message_handler(regexp='^https?://.+')
 def parse_tracking_fields(message):
     
@@ -30,9 +30,8 @@ def parse_tracking_fields(message):
     try:
         with requests.get(url, headers=headers, stream=True, timeout=8, verify='Unalix/certificates/cacert.pem') as r:
             url = r.url
-    except Exception as e:
-        print('Python Requests couldn\'t parse this link: '+url)
-        print(e)
+    except Exception:
+        True
     
     original_url = url
     
@@ -67,7 +66,7 @@ def parse_tracking_fields(message):
                     pattern = re.sub('^(.*)\s<\->\s.*$', '\g<1>', special_rule)
                     replace = re.sub('^.*\s<\->\s(.*)$', '\g<1>', special_rule)
                     url = re.sub(pattern, replace, url)
-        
+    
     bot.reply_to(message, '`'+url+'`', parse_mode='markdown', disable_notification=True)
-        
+
 bot.polling(none_stop=True)
