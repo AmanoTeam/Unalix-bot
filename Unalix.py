@@ -18,14 +18,7 @@ headers = {
 with open('Unalix/dialogs/en.json', 'r') as dialogs_file:
     dialogs = json.loads(dialogs_file.read())
 
-@bot.message_handler(commands=['start', 'help'])
-def send_welcome(message):
-    bot.reply_to(message, dialogs['welcome'], parse_mode='markdown', disable_web_page_preview=True, disable_notification=True)
-
-@bot.message_handler(regexp='^https?://.+')
-def parse_tracking_fields(message):
-    
-    url = message.text
+def parse_tracking_fields(url):
     
     try:
         with requests.get(url, headers=headers, stream=True, timeout=8, verify='Unalix/certificates/cacert.pem') as r:
@@ -66,6 +59,27 @@ def parse_tracking_fields(message):
                     pattern = re.sub('^(.*)\s<\->\s.*$', '\g<1>', special_rule)
                     replace = re.sub('^.*\s<\->\s(.*)$', '\g<1>', special_rule)
                     url = re.sub(pattern, replace, url)
+    
+    return url
+
+
+@bot.message_handler(commands=['start', 'help'])
+def send_welcome(message):
+    bot.reply_to(message, dialogs['welcome'], parse_mode='markdown', disable_web_page_preview=True, disable_notification=True)
+
+@bot.inline_handler(lambda query: re.match('https?://.+', query.query))
+def query_handler(inline_query):
+    
+    url = parse_tracking_fields(inline_query.query)
+    
+    result = telebot.types.InlineQueryResultArticle('1', url, telebot.types.InputTextMessageContent(url))
+    
+    bot.answer_inline_query(inline_query.id, [result])
+
+@bot.message_handler(regexp='^https?://.+')
+def url_handler(message):
+    
+    url = parse_tracking_fields(message.text)
     
     bot.reply_to(message, '`'+url+'`', parse_mode='markdown', disable_notification=True)
 
