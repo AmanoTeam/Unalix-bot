@@ -36,6 +36,8 @@ In order to be able to identify the link contained in the message, it must be in
 
 * It must start with `http://` or `https://` (case-sensitive)
 
+_Unalix also supports inline queries. To use it, open a chat on Telegram and type `@Unalix_bot` in the message field._
+
 ### Is the bot safe?
 
 * Unalix does not permanently store or collect sent links/messages.
@@ -60,7 +62,7 @@ Unalix is ​​written in Python. To find out how to run it in your operating e
 Install all required modules/dependencies using `pip`:
 
 ```
-pip3 install --upgrade 'requests' 'pyTelegramBotAPI'
+pip3 install --upgrade 'pyTelegramBotAPI'
 ```
 
 ### Get the source
@@ -84,7 +86,7 @@ $ mv 'Unalix-master' 'Unalix'
 ```
 ### Setup the bot
 
-In the [Unalix/Unalix.py](Unalix.py#L7) file, on line 7, there is the following content:
+In the [Unalix.py](Unalix.py#L7) file, on line 7, there is the following content:
 
 ```
 bot = telebot.TeleBot('YOUR_TOKEN_HERE')
@@ -97,12 +99,13 @@ Open the file with a text editor and replace `YOUR_TOKEN_HERE` by the token of y
 Start the bot with
 
 ```
+$ cd ~
 $ python3 ~/Unalix/Unalix.py
 ```
 
 From that moment, the bot should already be receiving and processing the messages sent by the users (if any).
 
-To stop the bot, press `CTRL` +` C` on your keyboard. 
+**Note**: If you want your bot to be able to process [inline queries](https://core.telegram.org/bots/inline), enable them in your bot settings (Bot Settings > Inline Mode > Turn on).
 
 ## Contact
 
