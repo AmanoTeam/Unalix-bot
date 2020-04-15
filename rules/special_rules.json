@@ -1,58 +1,39 @@
 {
   "providers": {
     "amp-project": {
-      "urlPattern": "(.*google\\..*\\/amp\\/s\\/.*|\\/amp\\/|(\\?|&)amp\\b|\\.amp\\.htm)",
-      "completeProvider": false,
+      "urlPattern": "(.*google\\..*/amp/s/.*|/amp/|(\\?|&)amp\\b|\\.amp\\.htm)",
       "rules": [
-        ".*google.*\\/amp\\/s\\/(.*) <-> \\1",
-        "(\\/google)?\\/amp\\b <-> ",
+        ".*google.*/amp/s/(.*) <-> \\1",
+        "(/google)?/amp\\b <-> ",
         "\\.amp\\.htm <-> .htm"
-      ],
-      "referralMarketing": [],
-      "exceptions": [],
-      "rawRules": [],
-      "redirections": [],
-      "forceRedirection": false
+      ]
     },
     "youtube": {
-      "urlPattern": "(https:\\/\\/|http:\\/\\/)([a-zA-Z0-9-.]*\\.)?(youtube\\.com|youtu\\.be).*",
-      "completeProvider": false,
+      "urlPattern": "https?://(www\\.|m\\.)?(youtube\\.com|youtu\\.be|youtube-nocookie\\.com).*",
       "rules": [
-        "(www\\.)?(youtube\\.com|youtu\\.be) <-> invidio.us"
-      ],
-      "referralMarketing": [],
-      "exceptions": [],
-      "rawRules": [],
-      "redirections": [],
-      "forceRedirection": false
+        "(www\\.|m\\.)?(youtube\\.com|youtu\\.be|youtube-nocookie\\.com) <-> invidio.us"
+      ]
     },
     "twitter": {
-      "urlPattern": "(https:\\/\\/|http:\\/\\/)([a-zA-Z0-9-.]*\\.)?(twitter\\.com).*",
-      "completeProvider": false,
+      "urlPattern": "https?://(mobile\\.|www\\.)?twitter.com.*",
       "rules": [
-        "(www\\.)?(twitter\\.com) <-> nitter.net"
-      ],
-      "referralMarketing": [],
-      "exceptions": [],
-      "rawRules": [],
-      "redirections": [],
-      "forceRedirection": false
+        "(mobile\\.|www\\.)?twitter.com <-> nitter.net"
+      ]
     },
-    "instagram": {
-      "urlPattern": "(https:\\/\\/|http:\\/\\/)([a-zA-Z0-9-.]*\\.)?(instagram\\.com).*",
-      "completeProvider": false,
+    "instagram_user": {
+      "urlPattern": "https?://(m\\.|www\\.)?instagram.com(?!/p/).*",
       "rules": [
-        "(www\\.)?(instagram\\.com) <-> bibliogram.pussthecat.org"
-      ],
-      "referralMarketing": [],
-      "exceptions": [],
-      "rawRules": [],
-      "redirections": [],
-      "forceRedirection": false
+        "(m\\.|www\\.)?instagram.com/ <-> bibliogram.pussthecat.org/u/"
+      ]
+    },
+    "instagram_post": {
+      "urlPattern": "https?://(m\\.|www\\.)?instagram.com/p/.*",
+      "rules": [
+        "(m\\.|www\\.)?instagram.com <-> bibliogram.pussthecat.org"
+      ]
     },
     "all": {
       "urlPattern": ".*",
-      "completeProvider": false,
       "rules": [
         "(%26)+ <-> \\1",
         "(&)+ <-> \\1",
@@ -63,12 +44,7 @@
         "\\?& <-> ?",
         "%3f%26 <-> %3f",
         "%3F%26 <-> %3F"
-      ],
-      "referralMarketing": [],
-      "exceptions": [],
-      "rawRules": [],
-      "redirections": [],
-      "forceRedirection": false
+      ]
     }
   }
 }
