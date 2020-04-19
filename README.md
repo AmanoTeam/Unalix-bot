@@ -6,9 +6,9 @@ Unalix is a bot developed for Telegram. Its main purpose is to help users remove
 
 ### What it does?
 
-#### 
+In addition to removing tracking fields from URLs, Unalix also try to gets the direct link from shortened URLs.
 
-In addition to removing tracking fields from user-submitted URLs, Unalix also try to gets the direct link from shortened URLs. Example: If you send a shortened URL from services like [bit.ly](https://bitly.com) or [goo.gl](https://goo.gl), the bot will return you the URL to which the original link redirects, not the `bit.ly` or `goo.gl` URL.
+Unalix also transform YouTube, Twitter and Instagram links into Invidious, Nitter and Bibliogram links.
 
 ### Why would this be useful to me?
 
@@ -24,7 +24,7 @@ By sharing links like these, we are not only compromising our privacy, but we ar
 
 Analyzing and removing tracking parameters can be a very difficult and complicated task. Depending on the size of the link and/or the number of characters in it, it is not clear which fields are being used for online tracking purposes and which are not.
 
-Unalix has a list of specific rules ([data.min.json](rules/data.min.json) and [custom-data.min.json](rules/custom-data.min.json)) that aims to remove these tracking parameters. They can remove all tracking fields without breaking the link.
+Unalix has a list of specific rules that aims to remove these tracking parameters. They can remove all tracking fields without breaking the link.
 
 ### How to use?
 
@@ -36,7 +36,7 @@ In order to be able to identify the link contained in the message, it must be in
 
 * It must start with `http://` or `https://` (case-sensitive)
 
-_Unalix also supports inline queries. To use it, open a chat on Telegram and type `@Unalix_bot` in the message field._
+Unalix also supports inline queries. To use it, open a chat on Telegram and type `@Unalix_bot` in the message field.
 
 ### Is the bot safe?
 
@@ -44,14 +44,13 @@ _Unalix also supports inline queries. To use it, open a chat on Telegram and typ
 
 * We do not send spam, advertisements or anything unrelated to the bot's primary purpose to its users.
 
-## Limitations
+### Limitations
 
 Unalix has some limitations related to link processing, see them below:
 
-### Getting direct links from URL shorteners
+#### Getting direct links from URL shorteners
 
-- Unalix only follows the URLs/paths provided by the `Location` header
-   - It means that Unalix cannot obtain direct links from URL shorteners that require user interaction (e.g clicking a button or resolving CAPTCHA) to redirect or that uses JavaScript code to redirect.
+Unalix only follows the URLs/paths provided by the `Location` header (see [RFC 7231, section 7.1.2: Location](https://tools.ietf.org/html/rfc7231#section-7.1.2)). It means that Unalix cannot obtain direct links from URL shorteners that require user interaction (e.g clicking a button or resolving CAPTCHA) to redirect or that uses JavaScript code to redirect.
 
 ## For developers
 
@@ -62,7 +61,7 @@ Unalix is ​​written in Python. To find out how to run it in your operating e
 Install all required modules/dependencies using `pip`:
 
 ```
-pip3 install --upgrade 'pyTelegramBotAPI'
+pip3 install --upgrade 'pyTelegramBotAPI' 'unalix'
 ```
 
 ### Get the source
@@ -86,10 +85,10 @@ $ mv 'Unalix-master' 'Unalix'
 ```
 ### Setup the bot
 
-In the [Unalix.py](Unalix.py#L7) file, on line 7, there is the following content:
+In the [Unalix.py](Unalix.py#L5) file, on line 5, there is the following content:
 
 ```
-bot = telebot.TeleBot('YOUR_TOKEN_HERE')
+bot = TeleBot('YOUR_TOKEN_HERE')
 ```
 
 Open the file with a text editor and replace `YOUR_TOKEN_HERE` by the token of your bot.
