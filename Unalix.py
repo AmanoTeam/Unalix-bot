@@ -1,4 +1,5 @@
 from json import loads
+from re import match
 from telebot import TeleBot, types
 from unalix import clear_url
 
@@ -11,7 +12,7 @@ with open('Unalix/dialogs/en.json', 'r') as dialogs_file:
 def send_welcome(message):
     bot.reply_to(message, dialogs['welcome'], parse_mode='markdown', disable_web_page_preview=True, disable_notification=True)
 
-@bot.inline_handler(lambda query: re.match('https?://.+', query.query))
+@bot.inline_handler(lambda query: match('https?://.+', query.query))
 def query_handler(inline_query):
     
     url = clear_url(inline_query.query)
@@ -25,6 +26,6 @@ def url_handler(message):
     
     url = clear_url(message.text)
     
-    bot.reply_to(message, url, disable_notification=True)
+    bot.reply_to(message, '`'+url+'`', parse_mode='markdown', disable_notification=True)
 
 bot.polling(none_stop=True)
