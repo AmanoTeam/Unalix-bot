@@ -61,7 +61,7 @@ Unalix is ​​written in Python. To find out how to run it in your operating e
 Install all required modules/dependencies using `pip`:
 
 ```
-pip3 install --upgrade 'pyTelegramBotAPI' 'unalix'
+pip3 install --upgrade 'pyTelegramBotAPI' 'Unalix'
 ```
 
 ### Get the source
@@ -79,27 +79,27 @@ or
 **Download with wget and extract all files:**
 
 ```
-$ wget 'https://codeload.github.com/AmanoTeam/Unalix/zip/master' --output-document ~/Unalix.zip
-$ unzip 'Unalix.zip' && rm -f 'Unalix.zip'
+$ wget 'https://codeload.github.com/AmanoTeam/Unalix/tar.gz/master' --output-document 'Unalix.tar.gz'
+$ tar --extract --file='Unalix.tar.gz'
 $ mv 'Unalix-master' 'Unalix'
 ```
 ### Setup the bot
 
-In the [Unalix.py](Unalix.py#L5) file, on line 5, there is the following content:
+In the [settings.py](settings.py#L3) file, on line 3, there is the following content:
 
 ```
-bot = TeleBot('YOUR_TOKEN_HERE')
+bot = telebot.TeleBot('TOKEN_GOES_HERE')
 ```
 
-Open the file with a text editor and replace `YOUR_TOKEN_HERE` by the token of your bot.
+Open the file with a text editor and replace `TOKEN_GOES_HERE` by the token of your bot.
 
 ### Start the bot
 
 Start the bot with
 
 ```
-$ cd ~
-$ python3 ~/Unalix/Unalix.py
+$ cd 'Unalix'
+$ python3 'bot.py'
 ```
 
 From that moment, the bot should already be receiving and processing the messages sent by the users (if any).
@@ -108,7 +108,7 @@ From that moment, the bot should already be receiving and processing the message
 
 ## Contact
 
-Want to say something? Need some help? [Open a issue](https://github.com/AmanoTeam/Unalix/issues) or [send a email](http://scr.im:80/SnwMds).
+Want to say something? Need some help? [Open a issue](https://github.com/AmanoTeam/Unalix/issues) or [send a email](https://spamty.eu/show.php?version=v6&email=26&key=d7967f0e625c5f19c9c655b8).
 
 ## License
 
